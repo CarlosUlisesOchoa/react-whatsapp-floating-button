@@ -16,3 +16,6 @@ tsconfig.json
 vite.config.ts
 storybook-static
 .eslintignore
+index.html
+src
+public
