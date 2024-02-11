@@ -1,24 +1,28 @@
 {
-  "name": "@carlos8a/vite-component-library-template",
+  "name": "@carlos8a/react-whatsapp-floating-button",
   "private": false,
   "version": "0.0.1",
-  "description": "A simple template for creating a component library using Vite, React, and TypeScript",
+  "description": "A react component to add a floating whatsapp button to your project",
   "repository": {
     "type": "git",
-    "url": "https://github.com/CarlosUlisesOchoa/vite-component-library-template"
+    "url": "https://github.com/CarlosUlisesOchoa/react-whatsapp-floating-button"
   },
   "keywords": [
     "react",
     "react component",
-    "react typescript"
+    "react typescript",
+    "whatsapp",
+    "floating whatsapp button",
+    "whatsapp button"
   ],
   "author": "Carlos Ochoa <contact@carlos8a.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/CarlosUlisesOchoa/vite-component-library-template/issues"
+    "url": "https://github.com/CarlosUlisesOchoa/react-whatsapp-floating-button/issues"
   },
-  "homepage": "https://github.com/CarlosUlisesOchoa/vite-component-library-template",
+  "homepage": "https://github.com/CarlosUlisesOchoa/react-whatsapp-floating-button",
   "scripts": {
+    "dev": "vite",
     "build": "shx rm -rf dist && vite build",
     "delete:node_modules": "shx rm -rf package-lock.json && shx rm -rf node_modules",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --fix",
@@ -34,19 +38,16 @@
       "prettier -w"
     ]
   },
-  "publishConfig": {
-    "access": "public"
-  },
-  "main": "dist/vite-component-library-template.cjs",
-  "module": "dist/vite-component-library-template.js",
+  "main": "dist/react-whatsapp-floating-button.js",
+  "module": "dist/react-whatsapp-floating-button.mjs",
   "types": "./dist/index.d.ts",
   "engines": {
     "node": ">=18"
   },
   "exports": {
     ".": {
-      "import": "./dist/vite-component-library-template.mjs",
-      "require": "./dist/cjs/vite-component-library-template.js"
+      "import": "./dist/react-whatsapp-floating-button.mjs",
+      "require": "./dist/react-whatsapp-floating-button.js"
     }
   },
   "peerDependencies": {
@@ -83,6 +84,7 @@
     "vite": "^5.1.1",
     "vite-plugin-css-injected-by-js": "^3.4.0",
     "vite-plugin-dts": "^3.7.2",
+    "vite-plugin-tsconfig": "^1.0.5",
     "vitest": "^1.2.2"
   }
 }
