@@ -1,1 +1,1 @@
-export { Counter } from './Counter'
+export { FloatingWhatsApp } from './FloatingWhatsApp'
