@@ -3,13 +3,9 @@ import { reducer } from './reducer'
 import { WhatsappSVG, CloseSVG, CheckSVG, SendSVG } from './Icons'
 import styles from './FloatingWhatsApp.module.css'
 
-import darkBG from './assets/bg-chat-tile-light.png' // FIXME: to allow importing images
-import lightBG from './assets/bg-chat-tile-dark.png' // FIXME: to allow importing images
-import dummyAvatar from './assets/avatar.svg' // FIXME: to allow importing images
-
-// const darkBG = 'http://192.168.0.4:8081/watemp/bg-chat-tile-dark.png' // TODO: This is just a temporary patch
-// const lightBG = 'http://192.168.0.4:8081/watemp/bg-chat-tile-light.png' // TODO: This is just a temporary patch
-// const dummyAvatar = 'http://192.168.0.4:8081/watemp/avatar.svg' // TODO: This is just a temporary patch
+import darkBG from './assets/bg-chat-tile-light.png'
+import lightBG from './assets/bg-chat-tile-dark.png'
+import dummyAvatar from './assets/avatar.svg'
 
 export interface FloatingWhatsAppProps {
   /** Callback function fires on click */
@@ -206,20 +202,17 @@ export function FloatingWhatsApp({
   return (
     <div
       className={`${styles.floatingWhatsapp} ${darkMode ? `${styles.dark} ` : ''} ${className}`}
-      style={style}
-    >
+      style={style}>
       <div
         className={`${styles.whatsappButton} ${buttonClassName}`}
         onClick={handleOpen}
         style={buttonStyle}
-        aria-hidden='true'
-      >
+        aria-hidden='true'>
         <WhatsappSVG />
         {isNotification && (
           <span
             className={`${styles.notificationIndicator} ${notificationClassName}`}
-            style={notificationStyle}
-          >
+            style={notificationStyle}>
             1
           </span>
         )}
@@ -229,8 +222,7 @@ export function FloatingWhatsApp({
         className={`${styles.whatsappChatBox} ${isOpen ? styles.open : styles.close} ${chatboxClassName}`}
         onClick={(event) => event.stopPropagation()}
         aria-hidden='true'
-        style={{ height: isOpen ? chatboxHeight : 0, ...chatboxStyle }}
-      >
+        style={{ height: isOpen ? chatboxHeight : 0, ...chatboxStyle }}>
         <header className={styles.chatHeader}>
           <div className={styles.avatar}>
             <img src={avatar} width='60' height='60' alt='whatsapp-avatar' />
@@ -246,8 +238,7 @@ export function FloatingWhatsApp({
 
         <div
           className={styles.chatBody}
-          style={{ backgroundImage: `url(${darkMode ? darkBG : lightBG})` }}
-        >
+          style={{ backgroundImage: `url(${darkMode ? darkBG : lightBG})` }}>
           {isDelay ? (
             <div className={styles.chatBubble}>
               <div className={styles.typing}>
