@@ -22,13 +22,11 @@
   },
   "homepage": "https://github.com/CarlosUlisesOchoa/react-whatsapp-floating-button",
   "scripts": {
-    "dev": "vite",
     "build": "shx rm -rf dist && vite build",
-    "delete:node_modules": "shx rm -rf package-lock.json && shx rm -rf node_modules",
+    "delete:node_modules_lock": "shx rm -f package-lock.json yarn.lock pnpm-lock.yaml",
+    "delete:node_modules": "pnpm delete:node_modules_lock && shx rm -rf node_modules",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --fix",
-    "prettier": "prettier --write \"src/**/*.{ts,tsx,js,mdx}\"",
-    "test": "vitest",
-    "test:cov": "vitest run --coverage"
+    "prettier": "prettier --write \"src/**/*.{ts,tsx,js,mdx}\""
   },
   "files": [
     "dist"
@@ -56,13 +54,11 @@
   },
   "devDependencies": {
     "@babel/core": "^7.23.9",
-    "@testing-library/react": "^14.2.1",
     "@types/node": "^20.11.17",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@vitejs/plugin-react": "^4.2.1",
-    "@vitest/coverage-v8": "^1.2.2",
     "autoprefixer": "^10.4.17",
     "babel-loader": "^9.1.3",
     "eslint": "^8.56.0",
@@ -83,8 +79,6 @@
     "typescript": "^5.3.3",
     "vite": "^5.1.1",
     "vite-plugin-css-injected-by-js": "^3.4.0",
-    "vite-plugin-dts": "^3.7.2",
-    "vite-plugin-tsconfig": "^1.0.5",
-    "vitest": "^1.2.2"
+    "vite-plugin-dts": "^3.7.2"
   }
 }
