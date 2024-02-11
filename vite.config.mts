@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import path from 'node:path'
 import react from '@vitejs/plugin-react'
+// import tsconfig from 'vite-plugin-tsconfig' // Temporary disabled
 import dts from 'vite-plugin-dts'
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js'
 import autoprefixer from 'autoprefixer'
@@ -23,11 +24,16 @@ export default defineConfig({
     },
   },
   plugins: [
+    cssInjectedByJsPlugin(),
     react(),
+    // tsconfig({ // WIP: Temporary disabled
+    //   filename: 'tsconfig.build.json',
+    //   logLevel: 'info',
+    // }),
     dts({
       insertTypesEntry: true,
+      // tsconfigPath: path.resolve(__dirname, 'tsconfig.build.json'), // No longer needed since we are using vite-plugin-tsconfig (tsconfig({}))
     }),
-    cssInjectedByJsPlugin(),
   ],
   css: {
     postcss: {
@@ -35,7 +41,7 @@ export default defineConfig({
     },
   },
   build: {
-    // minify: true, FIXME: Temporary disabled due to a bug
+    minify: false, // TODO: Restore minification after debugging
     lib: {
       entry: path.resolve(__dirname, 'src/lib/index.ts'),
       name: formattedName,
