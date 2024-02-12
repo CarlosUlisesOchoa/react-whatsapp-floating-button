@@ -12,7 +12,7 @@ import { name } from './package.json'
 
 /**
  * Removes everything before the last '/' in the package name
- * @musk/component-repo -> component-repo
+ * @carlos8a/component-repo -> component-repo
  */
 
 const formattedName = name.match(/[^/]+$/)?.[0] ?? 'index'

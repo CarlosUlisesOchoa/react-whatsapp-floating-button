@@ -22,7 +22,10 @@
   },
   "homepage": "https://github.com/CarlosUlisesOchoa/react-whatsapp-floating-button",
   "scripts": {
-    "build": "shx rm -rf dist && vite build",
+    "dev": "vite",
+    "prebuild": "shx rm -rf dist && shx rm -f tsconfig.json && shx cp tsconfig.build.json tsconfig.json",
+    "postbuild": "shx rm -f tsconfig.json && shx cp tsconfig.dev.json tsconfig.json",
+    "build:lib": "pnpm run prebuild && vite build && pnpm run postbuild",
     "delete:node_modules_lock": "shx rm -f package-lock.json yarn.lock pnpm-lock.yaml",
     "delete:node_modules": "pnpm delete:node_modules_lock && shx rm -rf node_modules",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --fix",
