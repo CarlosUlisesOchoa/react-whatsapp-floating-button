@@ -1,1 +1,4 @@
 - [x] Create TODO file
+- [] Improve README.md
+- [] Publish to npm
+- [] Add tests (install react testing library and vitest)
