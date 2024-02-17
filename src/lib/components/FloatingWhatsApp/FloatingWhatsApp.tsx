@@ -34,11 +34,11 @@ export interface FloatingWhatsAppProps {
   /** Text below the account username */
   statusMessage?: string
   /** Text inside the chat box */
-  chatMessage?: string
+  initialMessageByServer?: string
   /** Input placeholder */
   placeholder?: string
 
-  /** Time delay after which the chatMessage is displayed (in seconds) */
+  /** Time delay after which the initialMessageByServer is displayed (in seconds) */
   messageDelay?: number
 
   /** Allow notifications (Disabled after user opens the chat box) */
@@ -80,7 +80,7 @@ export function FloatingWhatsApp({
   accountName = 'Account Name',
   avatar = dummyAvatar,
   statusMessage = 'Typically replies within 1 hour',
-  chatMessage = 'Hello there! 🤝 \nHow can we help?',
+  initialMessageByServer = 'Hello there! 🤝 \nHow can we help?',
   placeholder = 'Type a message..',
 
   messageDelay = 2,
@@ -168,9 +168,9 @@ export function FloatingWhatsApp({
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     if (!inputRef.current?.value) return
-
+    // TODO: Change hardcoded endpoint to env variable
     window.open(
-      `https://api.whatsapp.com/send/?phone=${phoneNumber}&text=${inputRef.current.value}`
+      `https://api.whatsapp.com/send/?phone=${phoneNumber}&text=${inputRef.current.value.trim()}`
     )
     if (onSubmit) onSubmit(event, inputRef.current.value)
     inputRef.current.value = ''
@@ -207,7 +207,7 @@ export function FloatingWhatsApp({
         className={`${styles.whatsappButton} ${buttonClassName}`}
         onClick={handleOpen}
         style={buttonStyle}
-        aria-hidden='true'>
+        aria-hidden={!isOpen}>
         <WhatsappSVG />
         {isNotification && (
           <span
@@ -231,46 +231,45 @@ export function FloatingWhatsApp({
             <span className={styles.statusTitle}>{accountName}</span>
             <span className={styles.statusSubtitle}>{statusMessage}</span>
           </div>
-          <div className={styles.close} onClick={handleClose} aria-hidden='true'>
+          <div className={styles.close} onClick={handleClose} aria-hidden={!isOpen}>
             <CloseSVG />
           </div>
         </header>
 
-        <div
-          className={styles.chatBody}
-          style={{ backgroundImage: `url(${darkMode ? darkBG : lightBG})` }}>
-          {isDelay ? (
-            <div className={styles.chatBubble}>
-              <div className={styles.typing}>
-                <div className={styles.dot} />
-                <div className={styles.dot} />
-                <div className={styles.dot} />
+        <div className={styles.preChatBody}>
+          <div
+            className={styles.chatBody}
+            // style={{ backgroundImage: `url(${darkMode ? darkBG : lightBG})` }}
+          >
+            {isDelay ? (
+              <div className={styles.chatBubble}>
+                <div className={styles.typing}>
+                  <div className={styles.dot} />
+                  <div className={styles.dot} />
+                  <div className={styles.dot} />
+                </div>
               </div>
-            </div>
-          ) : (
-            <div className={styles.message}>
-              <span className={styles.triangle} />
-              <span className={styles.accountName}>{accountName}</span>
-              <p className={styles.messageBody}>{chatMessage}</p>
-              <span className={styles.messageTime}>
-                {timeNow}
-                <span style={{ marginLeft: 5 }}>
-                  <CheckSVG />
-                </span>
-              </span>
-            </div>
-          )}
+            ) : (
+              <div className={styles.message}>
+                <span className={styles.triangle} />
+                <span className={styles.accountName}>{accountName}</span>
+                <p className={styles.messageBody}>{initialMessageByServer}</p>
+                <span className={styles.messageTime}>{timeNow}</span>
+              </div>
+            )}
+          </div>
         </div>
 
         <footer className={styles.chatFooter}>
           <form onSubmit={handleSubmit}>
             <input
+              disabled={!isOpen}
               className={styles.input}
               placeholder={placeholder}
               ref={inputRef}
               dir='auto'
             />
-            <button type='submit' className={styles.buttonSend}>
+            <button disabled={!isOpen} type='submit' className={styles.buttonSend}>
               <SendSVG />
             </button>
           </form>
