@@ -22,15 +22,13 @@ function App() {
       </div>
       <p className='read-the-docs'>Click on the Vite and React logos to learn more</p>
       <FloatingWhatsApp
-        phoneNumber='5214521027803'
-        accountName='Gestoría vehicular'
-        // avatar='http://192.168.0.4:3000/assets/images/kenzo-whatsapp-avatar.webp'
-        chatMessage='Hola, ¿cómo puedo ayudarle?'
-        // darkMode={isDark}
-        statusMessage='En línea'
-        placeholder='Escriba su mensaje'
-        // allowClickAway={true}
-        allowEsc={true}
+        phoneNumber='5215540000000' // Required
+        accountName='Carlos Ochoa' // Optional
+        initialMessageByServer='Hi there!, how can I assist you?' // Optional
+        statusMessage='Available' // Optional
+        placeholder='Write here...' // Optional
+        allowEsc={true} // Optional
+        // You can find the complete list of props in the README.md file
       />
     </>
   )
