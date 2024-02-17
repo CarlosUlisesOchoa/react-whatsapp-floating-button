@@ -11,6 +11,7 @@ ignore-this-folder
 
 node_modules
 dist
+publish-lib
 dist-ssr
 *.local
 
