@@ -285,6 +285,7 @@
 }
 
 .chatFooter form .input {
+  color: #212121;
   border-radius: 20px;
   padding: 0 10px;
   border: 2px solid rgba(222, 217, 212, 0.8);
@@ -360,6 +361,10 @@
 }
 
 /* dark mode */
+
+.dark .chatHeader {
+  background-color: #1f2c34;
+}
 
 .dark .preChatBody::before {
   background-image: url('@/lib/components/FloatingWhatsApp/assets/bg-chat-tile-light.png');
