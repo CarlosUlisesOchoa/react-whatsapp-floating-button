@@ -2,7 +2,7 @@
 
 ## Description
 
-A simple, customizable component designed to add a WhatsApp floating button to your React applications, enhancing user engagement by facilitating direct WhatsApp communication.
+This React component offers an elegant WhatsApp floating button, serving as a bridge to the official WhatsApp application. It simulates a WhatsApp chat interface, allowing users to initiate conversations directly from your website. Upon clicking "submit," users are redirected to WhatsApp with their message pre-filled, ready to continue the conversation. Ideal for enhancing customer support and engagement, this component simplifies the transition from web inquiries to WhatsApp communication using WhatsApp's API.
 
 ## Screenshot
 
