@@ -90,7 +90,7 @@ export default App;
 | `notificationStyle`       | CSSProperties | No       | Inline style for notification                                                                                            | `-`                              |
 | `notificationClassName`   |    String     | No       | CSS class for notification indicator                                                                                     | `floating-whatsapp-notification` |
 
-## Development and Testing Files
+### Development and Testing Files
 
 The following files are intended solely for development and testing purposes and do not form part of the component's distribution:
 
@@ -98,6 +98,64 @@ The following files are intended solely for development and testing purposes and
 - `<root>/src/**/*` (excluding `<root>/src/lib/**/*` which is the component)
 - `<root>/public/` (used to test the component)
 - `<root>/preparePublish.js` (prepares the component for npm publishing)
+
+## Building and Testing the Package
+
+**Note**: For anyone that just want to get and use the component, the [Installation](#installation) and [Usage Example](#usage-example) sections have got all you need 👍🏻.
+
+This section is for developers who want to modify the component. Follow the steps outlined below to rebuild and test your changes locally.
+
+### Prerequisites
+
+Make sure you have Node.js (version 18 or higher) installed on your system. This project employs `pnpm` for efficient dependency management. If you don't have `pnpm`, install it with the following command:
+
+```bash
+npm install -g pnpm
+```
+
+### Setting Up the Development Environment
+
+1. **Clone the Repository**: Get a copy of the project onto your local machine by cloning the GitHub repository.
+
+    ```bash
+    git clone https://github.com/CarlosUlisesOchoa/react-whatsapp-floating-button.git
+    cd react-whatsapp-floating-button
+    ```
+
+2. **Install Dependencies**: Use `pnpm` to install all the necessary dependencies. This ensures your environment is equipped with everything needed for building and testing the component.
+
+    ```bash
+    pnpm install
+    ```
+
+### Running a Local Development Server
+
+You will be able to modify and see real-time changes due we are using Vite to dev and deploy.
+
+You can run:
+
+```bash
+pnpm run dev
+```
+
+Now you will be able to start enhancing or customizing this beautiful but always improveable component 😁.
+
+### Rebuilding the Library
+
+Execute the following command to build the library:
+
+```bash
+pnpm run build:lib
+```
+
+This script performs a series of tasks:
+
+- Clears the `dist` directory for a clean build.
+- Adjusts TypeScript configurations for the build.
+- Compiles the library using Vite into the `dist` folder, which will contain the production-ready code.
+- Resets TypeScript configurations after the build.
+
+That's it. Now you can take a look at the ```dist``` directory where you'll find the bundled code.
 
 ## Acknowledgements
 
