@@ -34,8 +34,8 @@ generateCustomPackageJson()
 // Copy the entire dist directory to publish-lib
 fs.copySync(distDir, path.join(publishLibDir, 'dist'))
 
-// Optionally, copy LICENSE and any other files needed
-const filesToCopy = ['LICENSE']
+// Optionally, copy LICENSE, README and any other files needed
+const filesToCopy = ['LICENSE', 'README.md']
 filesToCopy.forEach((file) => {
   const sourcePath = path.join(rootDir, file)
   if (fs.existsSync(sourcePath)) {
