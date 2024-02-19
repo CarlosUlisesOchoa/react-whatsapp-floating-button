@@ -1,9 +1,0 @@
-- [x] Create TODO file
-- [x] Improve README.md
-- [x] Remove double check icon from server initial message
-- [x] Fix CSS color scheme
-- [] Hide chatbox if user clicks floating button while chatbox is open
-- [] Publish to npm
-- [] Add tests (install react testing library and vitest)
-- [] Add gif preview to README.md
-- [] Include link to sandbox in README.md
