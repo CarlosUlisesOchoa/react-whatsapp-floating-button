@@ -1,17 +1,15 @@
 import { useReducer, useEffect, useCallback, useRef, useMemo } from 'react'
 import { reducer } from './reducer'
-import { WhatsappSVG, CloseSVG, CheckSVG, SendSVG } from './Icons'
+import { WhatsappSVG, CloseSVG } from './Icons'
 import styles from './FloatingWhatsApp.module.css'
 
-import darkBG from './assets/bg-chat-tile-light.png'
-import lightBG from './assets/bg-chat-tile-dark.png'
 import dummyAvatar from './assets/avatar.svg'
 
 export interface FloatingWhatsAppProps {
   /** Callback function fires on click */
   onClick?: (event: React.MouseEvent<HTMLDivElement>) => void
-  /** Callback function fires on submit with event and form input value passed */
-  onSubmit?: (event: React.FormEvent<HTMLFormElement>, formValue: string) => void
+  /** Callback function fires on submit with event value passed */
+  onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void
   /** Callback function fires on close */
   onClose?: () => void
   /** Callback function fired when notification runs */
@@ -35,8 +33,13 @@ export interface FloatingWhatsAppProps {
   statusMessage?: string
   /** Text inside the chat box */
   initialMessageByServer?: string
-  /** Input placeholder */
-  placeholder?: string
+  /** Message that user will send to our WhatsApp */
+  initialMessageByClient?: string
+  /** Text inside start chat button */
+  startChatText?: string
+
+  /** Text that will appear in the tooltip, aside the WhatsApp button */
+  tooltipText?: string | null
 
   /** Time delay after which the initialMessageByServer is displayed (in seconds) */
   messageDelay?: number
@@ -81,7 +84,10 @@ export function FloatingWhatsApp({
   avatar = dummyAvatar,
   statusMessage = 'Typically replies within 1 hour',
   initialMessageByServer = 'Hello there! 🤝 \nHow can we help?',
-  placeholder = 'Type a message..',
+  initialMessageByClient = 'Hello!, I got your contact from your website. I would like to chat with you about...',
+  startChatText = 'Start chat with us',
+
+  tooltipText = null,
 
   messageDelay = 2,
 
@@ -116,7 +122,6 @@ export function FloatingWhatsApp({
     []
   )
 
-  const inputRef = useRef<HTMLInputElement | null>(null)
   const loops = useRef(0)
   const notificationInterval = useRef(0)
 
@@ -167,13 +172,11 @@ export function FloatingWhatsApp({
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    if (!inputRef.current?.value) return
     // TODO: Change hardcoded endpoint to env variable
     window.open(
-      `https://api.whatsapp.com/send/?phone=${phoneNumber}&text=${inputRef.current.value.trim()}`
+      `https://api.whatsapp.com/send/?phone=${phoneNumber}&text=${initialMessageByClient.trim()}`
     )
-    if (onSubmit) onSubmit(event, inputRef.current.value)
-    inputRef.current.value = ''
+    if (onSubmit) onSubmit(event)
   }
 
   useEffect(() => {
@@ -202,17 +205,26 @@ export function FloatingWhatsApp({
   return (
     <div
       className={`${styles.floatingWhatsapp} ${darkMode ? `${styles.dark} ` : ''} ${className}`}
-      style={style}>
+      style={style}
+    >
+      {tooltipText && !isOpen && (
+        <div className={styles.tooltip}>
+          <span>{tooltipText}</span>
+          <div className={styles.tooltipArrow}></div>
+        </div>
+      )}
       <div
         className={`${styles.whatsappButton} ${buttonClassName}`}
         onClick={handleOpen}
         style={buttonStyle}
-        aria-hidden={!isOpen}>
+        aria-hidden={!isOpen}
+      >
         <WhatsappSVG />
         {isNotification && (
           <span
             className={`${styles.notificationIndicator} ${notificationClassName}`}
-            style={notificationStyle}>
+            style={notificationStyle}
+          >
             1
           </span>
         )}
@@ -222,7 +234,8 @@ export function FloatingWhatsApp({
         className={`${styles.whatsappChatBox} ${isOpen ? styles.open : styles.close} ${chatboxClassName}`}
         onClick={(event) => event.stopPropagation()}
         aria-hidden='true'
-        style={{ height: isOpen ? chatboxHeight : 0, ...chatboxStyle }}>
+        style={{ height: isOpen ? chatboxHeight : 0, ...chatboxStyle }}
+      >
         <header className={styles.chatHeader}>
           <div className={styles.avatar}>
             <img src={avatar} width='60' height='60' alt='whatsapp-avatar' />
@@ -231,9 +244,14 @@ export function FloatingWhatsApp({
             <span className={styles.statusTitle}>{accountName}</span>
             <span className={styles.statusSubtitle}>{statusMessage}</span>
           </div>
-          <div className={styles.close} onClick={handleClose} aria-hidden={!isOpen}>
+          <button
+            type='button'
+            className={styles.close}
+            onClick={handleClose}
+            aria-hidden={!isOpen}
+          >
             <CloseSVG />
-          </div>
+          </button>
         </header>
 
         <div className={styles.preChatBody}>
@@ -261,16 +279,15 @@ export function FloatingWhatsApp({
         </div>
 
         <footer className={styles.chatFooter}>
-          <form onSubmit={handleSubmit}>
-            <input
+          <form className={styles.chatFooterForm} onSubmit={handleSubmit}>
+            {/* NOTE: input and send button has been replaced with a single button "Start chat" */}
+            <button
               disabled={!isOpen}
-              className={styles.input}
-              placeholder={placeholder}
-              ref={inputRef}
-              dir='auto'
-            />
-            <button disabled={!isOpen} type='submit' className={styles.buttonSend}>
-              <SendSVG />
+              type='submit'
+              className={styles.startChatButton} // You will need to define this class in your CSS module
+            >
+              <WhatsappSVG className={styles.whatsappIconWrapper} />
+              {startChatText}
             </button>
           </form>
         </footer>
