@@ -1,9 +1,15 @@
+import { useContext } from 'react'
 import reactLogo from '@/assets/react.svg'
 import viteLogo from '@/assets/vite.svg'
-import { FloatingWhatsApp } from '@/lib'
+import { FloatingWhatsApp } from '@carlos8a/react-whatsapp-floating-button'
 import './App.css'
+import ThemeToggler from './components/Theme/ThemeToggler'
+import type { ThemeContextType } from './compiler/types'
+import { ThemeContext } from './context/themeContext'
 
 function App() {
+  const { theme } = useContext<ThemeContextType>(ThemeContext)
+  const isDarkMode = theme === 'dark'
   return (
     <>
       <div>
@@ -21,12 +27,14 @@ function App() {
         </p>
       </div>
       <p className='read-the-docs'>Click on the Vite and React logos to learn more</p>
+      <ThemeToggler />
       <FloatingWhatsApp
         phoneNumber='5215540000000' // Required
         accountName='Carlos Ochoa' // Optional
         initialMessageByServer='Hi there!, how can I assist you?' // Optional
         statusMessage='Available' // Optional
-        placeholder='Write here...' // Optional
+        tooltipText='Send us a message' // Optional
+        darkMode={isDarkMode} // Optional
         allowEsc={true} // Optional
         // You can find the complete list of props in the README.md file
       />
