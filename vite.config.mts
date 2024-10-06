@@ -20,6 +20,10 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
+      '@carlos8a/react-whatsapp-floating-button': path.resolve(
+        __dirname,
+        'src/lib/components/index.ts',
+      ),
     },
   },
   plugins: [
@@ -39,7 +43,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/lib/index.ts'),
       name: formattedName,
-      formats: ['es', 'cjs'],
+      // formats: ['es', 'cjs'],
     },
     rollupOptions: {
       external: ['react', 'react/jsx-runtime', 'react-dom'],
