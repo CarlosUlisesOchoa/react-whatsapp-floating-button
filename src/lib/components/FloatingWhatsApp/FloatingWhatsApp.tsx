@@ -2,6 +2,7 @@ import { useReducer, useEffect, useCallback, useRef, useMemo } from 'react'
 import { reducer } from './reducer'
 import { WhatsappSVG, CloseSVG } from './Icons'
 import styles from './FloatingWhatsApp.module.css'
+import dummyAvatar from './assets/avatar.svg'
 
 export interface FloatingWhatsAppProps {
   /** Callback function fires on click */
@@ -79,7 +80,7 @@ export function FloatingWhatsApp({
 
   phoneNumber = '1234567890',
   accountName = 'Account Name',
-  avatar = './assets/avatar.svg',
+  avatar = dummyAvatar,
   statusMessage = 'Typically replies within 1 hour',
   initialMessageByServer = 'Hello there! 🤝 \nHow can we help?',
   initialMessageByClient = 'Hello!, I got your contact from your website. I would like to chat with you about...',
