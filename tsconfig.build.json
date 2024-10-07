@@ -2,8 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@carlos8a/react-whatsapp-floating-button": ["src/lib/components/index.ts"]
+      "@/*": ["src/*"]
     },
     "target": "ES2015",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
@@ -23,7 +22,7 @@
     "importHelpers": true,
     "noFallthroughCasesInSwitch": true,
     "declaration": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "outDir": "./dist"
   },
   "include": ["src/lib/**/*.ts", "src/lib/**/*.tsx"],
