@@ -3,8 +3,6 @@ import { reducer } from './reducer'
 import { WhatsappSVG, CloseSVG } from './Icons'
 import styles from './FloatingWhatsApp.module.css'
 
-import dummyAvatar from './assets/avatar.svg'
-
 export interface FloatingWhatsAppProps {
   /** Callback function fires on click */
   onClick?: (event: React.MouseEvent<HTMLDivElement>) => void
@@ -20,7 +18,7 @@ export interface FloatingWhatsAppProps {
   /** Phone number in [intenational format](https://faq.whatsapp.com/general/contacts/how-to-add-an-international-phone-number) */
   phoneNumber: string
   /** Account Name */
-  accountName: string
+  accountName?: string
   /** Set chat box height */
   chatboxHeight?: number
   /** Inline style applied to chat box */
@@ -81,7 +79,7 @@ export function FloatingWhatsApp({
 
   phoneNumber = '1234567890',
   accountName = 'Account Name',
-  avatar = dummyAvatar,
+  avatar = './assets/avatar.svg',
   statusMessage = 'Typically replies within 1 hour',
   initialMessageByServer = 'Hello there! 🤝 \nHow can we help?',
   initialMessageByClient = 'Hello!, I got your contact from your website. I would like to chat with you about...',
@@ -119,7 +117,7 @@ export function FloatingWhatsApp({
 
   const timeNow = useMemo(
     () => new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-    []
+    [],
   )
 
   const loops = useRef(0)
@@ -161,7 +159,7 @@ export function FloatingWhatsApp({
       setTimeout(() => dispatch({ type: 'delay' }), messageDelay * 1000)
       if (onClick) onClick(event)
     },
-    [isOpen, onClick, messageDelay]
+    [isOpen, onClick, messageDelay],
   )
 
   const handleClose = useCallback(() => {
@@ -174,7 +172,7 @@ export function FloatingWhatsApp({
     event.preventDefault()
     // TODO: Change hardcoded endpoint to env variable
     window.open(
-      `https://api.whatsapp.com/send/?phone=${phoneNumber}&text=${initialMessageByClient.trim()}`
+      `https://api.whatsapp.com/send/?phone=${phoneNumber}&text=${initialMessageByClient.trim()}`,
     )
     if (onSubmit) onSubmit(event)
   }
