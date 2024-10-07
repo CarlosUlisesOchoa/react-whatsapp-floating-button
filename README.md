@@ -1,8 +1,17 @@
 # ⚛️⚡ WhatsApp Floating Button Component for React
 
-[![NPM](https://img.shields.io/npm/v/@carlos8a/react-whatsapp-floating-button.svg)](https://www.npmjs.com/package/@carlos8a/react-whatsapp-floating-button)
-![npm bundle size](https://img.shields.io/bundlephobia/minzip/%40carlos8a%2Freact-whatsapp-floating-button)
-![GitHub](https://img.shields.io/github/license/CarlosUlisesOchoa/react-whatsapp-floating-button)
+<div align="center">
+  <a href="https://www.npmjs.com/package/@carlos8a/react-whatsapp-floating-button">
+    <img src="https://img.shields.io/npm/v/@carlos8a/react-whatsapp-floating-button.svg" alt="NPM Version" />
+  </a>
+  <img src="https://img.shields.io/bundlephobia/minzip/%40carlos8a%2Freact-whatsapp-floating-button" alt="npm bundle size" />
+  <img src="https://img.shields.io/github/license/CarlosUlisesOchoa/react-whatsapp-floating-button" alt="GitHub License" />
+  <br />
+</div>
+
+<p align="center">
+    <img src="https://github.com/user-attachments/assets/ec0d415e-f149-42d3-9a8a-b459c8f4c56c" alt="WhatsApp Floating Button GIF" />
+</p>
 
 ## Description
 
@@ -14,7 +23,7 @@ The WhatsApp Floating Button Component supports both light and dark modes, ensur
 
 | Light Mode | Dark Mode |
 |:----------:|:---------:|
-| ![Light Mode](https://github.com/CarlosUlisesOchoa/react-whatsapp-floating-button/assets/26280134/b42b26c4-749c-4948-afe0-2dc8139b739f) | ![Dark Mode](https://github.com/CarlosUlisesOchoa/react-whatsapp-floating-button/assets/26280134/1d4fbafa-0c51-449b-8c60-aeaea45b5ea3) |
+| ![Light Mode](https://github.com/user-attachments/assets/40164cdb-34c5-4b5e-a34a-8e356d75c6ed) | ![Dark Mode](https://github.com/user-attachments/assets/2fa9a880-d3e1-4919-9b56-1ed48ed55cc2) |
 
 Toggle between the modes to provide a consistent user experience regardless of your app's theme.
 
@@ -55,8 +64,10 @@ const App = () => {
         accountName='Carlos Ochoa' // Optional
         avatar='/images/avatar.webp' // Optional
         initialMessageByServer='Hi there! How can I assist you?' // Optional
+        initialMessageByClient='Hello! I found your contact on your website. I would like to chat with you about...' // Optional
         statusMessage='Available' // Optional
-        placeholder='Write here...' // Optional
+        startChatText='Start chat with us' // Optional
+        tooltipText='Need help? Click to chat!' // Optional
         allowEsc={true} // Optional
         // Explore all available props below
       />
@@ -69,35 +80,37 @@ export default App;
 
 ### Available Props
 
-| Prop                      |     Type      | Required | Description                                                                                                              | Default                          |
-|---------------------------|:-------------:|:--------:|--------------------------------------------------------------------------------------------------------------------------|----------------------------------|
-| `phoneNumber`             |    String     | Yes      | Phone number in [international format](https://faq.whatsapp.com/general/contacts/how-to-add-an-international-phone-number)| `5215540000000`                  |
-| `accountName`             |    String     | No       | Account username                                                                                                         | `Account Name`                   |
-| `onClick`                 |   Function    | No       | Callback fired on click                                                                                                  | `-`                              |
-| `onSubmit`                |   Function    | No       | Callback fired on submit with event and form input value                                                                 | `-`                              |
-| `onClose`                 |   Function    | No       | Callback fired on close                                                                                                  | `-`                              |
-| `onLoopDone`              |   Function    | No       | Callback called when notification loop is done                                                                           | `-`                              |
-| `onNotification`          |   Function    | No       | Callback fired when a notification is triggered                                                                          | `-`                              |
-| `avatar`                  |    String     | No       | Path to change user avatar                                                                                               | `UI Face`                        |
-| `statusMessage`           |    String     | No       | Text displayed below the account username                                                                                | `Typically replies within 1 hour`|
-| `initialMessageByServer`  |    String     | No       | First message visitors receive                                                                                           | `Hello there! How can we help?`  |
-| `placeholder`             |    String     | No       | Placeholder text for the input field                                                                                     | `Type a message..`               |
-| `messageDelay`            |    Number     | No       | Delay before displaying `initialMessageByServer` (seconds)                                                               | `2`                              |
-| `darkMode`                |    Boolean    | No       | Enables dark style                                                                                                       | `false`                          |
-| `allowClickAway`          |    Boolean    | No       | Allows chat box to close when clicking outside                                                                           | `false`                          |
-| `allowEsc`                |    Boolean    | No       | Allows chat box to close when pressing `Escape` key                                                                      | `false`                          |
-| `className`               |    String     | No       | CSS class for the main wrapping `Div`                                                                                    | `floating-whatsapp`              |
-| `buttonClassName`         |    String     | No       | CSS class for the button                                                                                                 | `floating-whatsapp-button`       |
-| `style`                   | CSSProperties | No       | Inline style for the main wrapping `Div`                                                                                 | `{}`                             |
-| `buttonStyle`             | CSSProperties | No       | Inline style for the button                                                                                              | `{}`                             |
-| `chatboxHeight`           |    Number     | No       | Chat box height                                                                                                          | `320`                            |
-| `chatboxClassName`        |    String     | No       | CSS class for the chat box                                                                                               | `floating-whatsapp-chatbox`      |
-| `chatboxStyle`            | CSSProperties | No       | Inline style for the chat box                                                                                            | `{}`                             |
-| `notification`            |    Boolean    | No       | Enables notifications (disabled after user opens the chat box)                                                           | `false`                          |
-| `notificationDelay`       |    Number     | No       | Delay between notifications (seconds)                                                                                    | `60`                             |
-| `notificationLoop`        |    Number     | No       | Number of times notifications loop                                                                                       | `0`                              |
-| `notificationStyle`       | CSSProperties | No       | Inline style for notification                                                                                            | `-`                              |
-| `notificationClassName`   |    String     | No       | CSS class for notification indicator                                                                                     | `floating-whatsapp-notification` |
+| Prop                      |         Type          | Required | Description                                                                                                              | Default                          |
+|---------------------------|:---------------------:|:--------:|--------------------------------------------------------------------------------------------------------------------------|----------------------------------|
+| `phoneNumber`             |        String         |   Yes    | Phone number in [international format](https://faq.whatsapp.com/general/contacts/how-to-add-an-international-phone-number)| `5215540000000`                  |
+| `accountName`             |        String         |    No    | Account username                                                                                                         | `Account Name`                   |
+| `onClick`                 |       Function        |    No    | Callback fired on click                                                                                                  | `-`                              |
+| `onSubmit`                |       Function        |    No    | Callback fired on submit with the event passed                                                                           | `-`                              |
+| `onClose`                 |       Function        |    No    | Callback fired on close                                                                                                  | `-`                              |
+| `onLoopDone`              |       Function        |    No    | Callback called when notification loop is done                                                                           | `-`                              |
+| `onNotification`          |       Function        |    No    | Callback fired when a notification is triggered                                                                          | `-`                              |
+| `avatar`                  |        String         |    No    | Path to change user avatar using [static assets](https://create-react-app.dev/docs/adding-images-fonts-and-files/)       | `UI Face`                        |
+| `statusMessage`           |        String         |    No    | Text displayed below the account username                                                                                | `Typically replies within 1 hour`|
+| `initialMessageByServer`  |        String         |    No    | First message visitors receive                                                                                           | `Hello there! How can we help?`  |
+| `initialMessageByClient`  |        String         |    No    | Message that the user will send to your WhatsApp                                                                         | `Hello!, I got your contact from your website. I would like to chat with you about...` |
+| `startChatText`           |        String         |    No    | Text displayed inside the "Start Chat" button                                                                            | `Start chat with us`             |
+| `tooltipText`             |   String \| `null`    |    No    | Text that will appear in the tooltip, adjacent to the WhatsApp button                                                    | `null`                           |
+| `messageDelay`            |        Number         |    No    | Delay before displaying `initialMessageByServer` (seconds)                                                               | `2`                              |
+| `notification`            |       Boolean         |    No    | Enables notifications (disabled after user opens the chat box)                                                           | `false`                          |
+| `notificationDelay`       |        Number         |    No    | Delay between notifications (seconds)                                                                                    | `60`                             |
+| `notificationLoop`        |        Number         |    No    | Number of times notifications loop                                                                                       | `0`                              |
+| `notificationStyle`       |    CSSProperties      |    No    | Inline style for notification                                                                                            | `{}`                             |
+| `notificationClassName`   |        String         |    No    | CSS class for notification indicator                                                                                     | `floating-whatsapp-notification` |
+| `allowClickAway`          |       Boolean         |    No    | Allows chat box to close when clicking outside                                                                           | `false`                          |
+| `allowEsc`                |       Boolean         |    No    | Allows chat box to close when pressing `Escape` key                                                                      | `false`                          |
+| `darkMode`                |       Boolean         |    No    | Enables dark style                                                                                                       | `false`                          |
+| `className`               |        String         |    No    | CSS class for the main wrapping `Div`                                                                                    | `floating-whatsapp`              |
+| `buttonClassName`         |        String         |    No    | CSS class for the button                                                                                                 | `floating-whatsapp-button`       |
+| `style`                   |    CSSProperties      |    No    | Inline style for the main wrapping `Div`                                                                                 | `{}`                             |
+| `buttonStyle`             |    CSSProperties      |    No    | Inline style for the button                                                                                              | `{}`                             |
+| `chatboxHeight`           |        Number         |    No    | Chat box height                                                                                                          | `320`                            |
+| `chatboxClassName`        |        String         |    No    | CSS class for the chat box                                                                                               | `floating-whatsapp-chatbox`      |
+| `chatboxStyle`            |    CSSProperties      |    No    | Inline style for the chat box                                                                                            | `{}`                             |
 
 ### Development and Testing Files
 
