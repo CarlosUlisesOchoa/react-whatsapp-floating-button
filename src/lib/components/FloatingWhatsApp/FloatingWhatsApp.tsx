@@ -2,7 +2,6 @@ import { useReducer, useEffect, useCallback, useRef, useMemo } from 'react'
 import { reducer } from './reducer'
 import { WhatsappSVG, CloseSVG } from './Icons'
 import styles from './FloatingWhatsApp.module.css'
-
 import dummyAvatar from './assets/avatar.svg'
 
 export interface FloatingWhatsAppProps {
@@ -20,7 +19,7 @@ export interface FloatingWhatsAppProps {
   /** Phone number in [intenational format](https://faq.whatsapp.com/general/contacts/how-to-add-an-international-phone-number) */
   phoneNumber: string
   /** Account Name */
-  accountName: string
+  accountName?: string
   /** Set chat box height */
   chatboxHeight?: number
   /** Inline style applied to chat box */
@@ -119,7 +118,7 @@ export function FloatingWhatsApp({
 
   const timeNow = useMemo(
     () => new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-    []
+    [],
   )
 
   const loops = useRef(0)
@@ -161,7 +160,7 @@ export function FloatingWhatsApp({
       setTimeout(() => dispatch({ type: 'delay' }), messageDelay * 1000)
       if (onClick) onClick(event)
     },
-    [isOpen, onClick, messageDelay]
+    [isOpen, onClick, messageDelay],
   )
 
   const handleClose = useCallback(() => {
@@ -174,7 +173,7 @@ export function FloatingWhatsApp({
     event.preventDefault()
     // TODO: Change hardcoded endpoint to env variable
     window.open(
-      `https://api.whatsapp.com/send/?phone=${phoneNumber}&text=${initialMessageByClient.trim()}`
+      `https://api.whatsapp.com/send/?phone=${phoneNumber}&text=${initialMessageByClient.trim()}`,
     )
     if (onSubmit) onSubmit(event)
   }

@@ -26,13 +26,7 @@ export default defineConfig({
       ),
     },
   },
-  plugins: [
-    cssInjectedByJsPlugin(),
-    react(),
-    dts({
-      insertTypesEntry: true,
-    }),
-  ],
+  plugins: [cssInjectedByJsPlugin(), react(), dts({ insertTypesEntry: true })],
   css: {
     postcss: {
       plugins: [autoprefixer()],
@@ -43,6 +37,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/lib/index.ts'),
       name: formattedName,
+      fileName: (format) => `index.${format}.js`,
       // formats: ['es', 'cjs'],
     },
     rollupOptions: {
@@ -55,5 +50,7 @@ export default defineConfig({
         },
       },
     },
+    // sourcemap: true,
+    emptyOutDir: true,
   },
 })

@@ -1,7 +1,7 @@
 {
   "name": "@carlos8a/react-whatsapp-floating-button",
   "private": false,
-  "version": "1.1.0",
+  "version": "1.1.5",
   "description": "A react component to add a floating whatsapp button to your project",
   "type": "module",
   "repository": {
@@ -24,7 +24,7 @@
   "homepage": "https://github.com/CarlosUlisesOchoa/react-whatsapp-floating-button",
   "scripts": {
     "dev": "vite",
-    "prebuild": "shx rm -rf dist publish-lib && shx rm -f tsconfig.json && shx cp tsconfig.build.json tsconfig.json",
+    "prebuild": "shx rm -f tsconfig.json && shx cp tsconfig.build.json tsconfig.json",
     "postbuild": "shx rm -f tsconfig.json && shx cp tsconfig.dev.json tsconfig.json",
     "build:lib": "pnpm run prebuild && vite build && pnpm run postbuild",
     "delete:node_modules_lock": "shx rm -f package-lock.json yarn.lock pnpm-lock.yaml",
@@ -32,16 +32,17 @@
     "publish:lib": "pnpm run build:lib"
   },
   "files": ["dist"],
-  "main": "dist/react-whatsapp-floating-button.umd.cjs",
-  "module": "dist/react-whatsapp-floating-button.js",
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
   "types": "./dist/index.d.ts",
   "engines": {
     "node": ">=18"
   },
   "exports": {
     ".": {
-      "import": "./dist/react-whatsapp-floating-button.js",
-      "require": "./dist/react-whatsapp-floating-button.umd.cjs"
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js",
+      "types": "./dist/index.d.ts"
     }
   },
   "peerDependencies": {
@@ -68,6 +69,7 @@
     "typescript": "^5.3.3",
     "vite": "^5.1.1",
     "vite-plugin-css-injected-by-js": "^3.4.0",
-    "vite-plugin-dts": "^3.7.2"
+    "vite-plugin-dts": "^3.7.2",
+    "vite-plugin-svgr": "^4.2.0"
   }
 }
