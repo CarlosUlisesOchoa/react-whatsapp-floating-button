@@ -187,3 +187,7 @@ That's it. Now you can take a look at the ```dist``` directory where you'll find
 ### License
 
 [MIT License](LICENSE) © 2024
+
+### About developer
+
+Visit my web [Carlos Ochoa](https://carlos8a.com?ref=gh)
