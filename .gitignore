@@ -8,6 +8,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 ignore-this-folder
+.atl/
 
 node_modules
 dist
