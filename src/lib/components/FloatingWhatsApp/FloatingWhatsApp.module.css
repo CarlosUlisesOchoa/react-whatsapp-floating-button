@@ -28,6 +28,16 @@
 	bottom: 2rem;
 	right: 2rem;
 	z-index: 9998;
+	border: none;
+	padding: 0;
+	font: inherit;
+	appearance: none;
+	-webkit-appearance: none;
+}
+
+.whatsappButton:focus-visible {
+	outline: 3px solid #005c4b;
+	outline-offset: 3px;
 }
 
 .whatsappButton:after {
@@ -136,6 +146,10 @@
 
 .chatHeader .close:hover > svg {
 	fill: rgba(255, 255, 255, 1);
+}
+
+.chatHeader .close:disabled {
+	cursor: default;
 }
 
 .chatHeader .close svg {

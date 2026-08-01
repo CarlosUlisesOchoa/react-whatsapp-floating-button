@@ -1,4 +1,4 @@
-import { useReducer, useEffect, useCallback, useRef, useMemo } from 'react'
+import { useReducer, useEffect, useCallback, useRef, useMemo, useId } from 'react'
 import { reducer } from './reducer'
 import { WhatsappSVG, CloseSVG } from './Icons'
 import styles from './FloatingWhatsApp.module.css'
@@ -6,7 +6,7 @@ import dummyAvatar from './assets/avatar.svg'
 
 export interface FloatingWhatsAppProps {
   /** Callback function fires on click */
-  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
   /** Callback function fires on submit with event value passed */
   onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void
   /** Callback function fires on close */
@@ -69,6 +69,11 @@ export interface FloatingWhatsAppProps {
   buttonStyle?: React.CSSProperties
   /** CSS className applied to button */
   buttonClassName?: string
+
+  /** Accessible label for the floating WhatsApp button */
+  buttonAriaLabel?: string
+  /** Accessible label for the chat box close button */
+  closeButtonAriaLabel?: string
 }
 
 export function FloatingWhatsApp({
@@ -102,6 +107,9 @@ export function FloatingWhatsApp({
   buttonStyle,
   buttonClassName = 'floating-whatsapp-button',
 
+  buttonAriaLabel = 'Open chat',
+  closeButtonAriaLabel = 'Close chat',
+
   chatboxHeight = 320,
   chatboxStyle,
   chatboxClassName = 'floating-whatsapp-chatbox',
@@ -110,6 +118,9 @@ export function FloatingWhatsApp({
   style,
   className = 'floating-whatsapp',
 }: FloatingWhatsAppProps) {
+  const reactId = useId()
+  const chatboxId = `floating-whatsapp-chatbox-${reactId}`
+
   const [{ isOpen, isDelay, isNotification }, dispatch] = useReducer(reducer, {
     isOpen: false,
     isDelay: true,
@@ -150,7 +161,7 @@ export function FloatingWhatsApp({
   }, [handleNotification, notificationDelay])
 
   const handleOpen = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
+    (event: React.MouseEvent<HTMLButtonElement>) => {
       event.stopPropagation()
 
       if (isOpen) return
@@ -212,27 +223,32 @@ export function FloatingWhatsApp({
           <div className={styles.tooltipArrow}></div>
         </div>
       )}
-      <div
+      <button
+        type='button'
         className={`${styles.whatsappButton} ${buttonClassName}`}
         onClick={handleOpen}
         style={buttonStyle}
-        aria-hidden={!isOpen}
+        aria-expanded={isOpen}
+        aria-controls={chatboxId}
+        aria-label={buttonAriaLabel}
       >
         <WhatsappSVG />
         {isNotification && (
           <span
             className={`${styles.notificationIndicator} ${notificationClassName}`}
             style={notificationStyle}
+            aria-hidden='true'
           >
             1
           </span>
         )}
-      </div>
+      </button>
 
       <div
+        id={chatboxId}
         className={`${styles.whatsappChatBox} ${isOpen ? styles.open : styles.close} ${chatboxClassName}`}
         onClick={(event) => event.stopPropagation()}
-        aria-hidden='true'
+        aria-hidden={!isOpen}
         style={{ height: isOpen ? chatboxHeight : 0, ...chatboxStyle }}
       >
         <header className={styles.chatHeader}>
@@ -247,7 +263,8 @@ export function FloatingWhatsApp({
             type='button'
             className={styles.close}
             onClick={handleClose}
-            aria-hidden={!isOpen}
+            disabled={!isOpen}
+            aria-label={closeButtonAriaLabel}
           >
             <CloseSVG />
           </button>
