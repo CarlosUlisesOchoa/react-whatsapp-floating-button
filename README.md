@@ -78,6 +78,10 @@ const App = () => {
 export default App;
 ```
 
+### Breaking changes (v1.2.0)
+
+The floating launcher button is now rendered as a real `<button>` element instead of a `<div>`, to fix keyboard accessibility and `aria-hidden` issues ([#11](https://github.com/CarlosUlisesOchoa/react-whatsapp-floating-button/issues/11)). As a result, the `onClick` callback now receives a `React.MouseEvent<HTMLButtonElement>` instead of a `React.MouseEvent<HTMLDivElement>`. If you rely on the event's `currentTarget` type, update your typings accordingly.
+
 ### Available Props
 
 | Prop                      |         Type          | Required | Description                                                                                                              | Default                          |
@@ -108,6 +112,8 @@ export default App;
 | `buttonClassName`         |        String         |    No    | CSS class for the button                                                                                                 | `floating-whatsapp-button`       |
 | `style`                   |    CSSProperties      |    No    | Inline style for the main wrapping `Div`                                                                                 | `{}`                             |
 | `buttonStyle`             |    CSSProperties      |    No    | Inline style for the button                                                                                              | `{}`                             |
+| `buttonAriaLabel`         |        String         |    No    | Accessible label for the floating WhatsApp launcher button                                                               | `Open chat`                      |
+| `closeButtonAriaLabel`    |        String         |    No    | Accessible label for the chat box close button                                                                          | `Close chat`                     |
 | `chatboxHeight`           |        Number         |    No    | Chat box height                                                                                                          | `320`                            |
 | `chatboxClassName`        |        String         |    No    | CSS class for the chat box                                                                                               | `floating-whatsapp-chatbox`      |
 | `chatboxStyle`            |    CSSProperties      |    No    | Inline style for the chat box                                                                                            | `{}`                             |
